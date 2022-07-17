@@ -1,0 +1,52 @@
+﻿
+@page
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Razor_Form_Submit.Pages.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Weather Forecast</title>
+    <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <td>Zip Code, City Name, or IP: </td>
+                <td><input type="text" id="txtFirstName" name="SearchKey" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" asp-page-handler="Submit" /></td>
+            </tr>
+        </table>
+        <hr />
+    </form>
+    @if (!@Model.Error && @Model.IsPost)
+    {
+        <div>
+            <h1>@Model.Location </h1><br>
+            <h2>@Model.Condition <img src="@Model.ConditionIcon"/></h2> <br>
+            @Model.High &deg;F<br>
+            @Model.Low &deg;F<br>
+            @Model.Rain %<br>
+        </div>
+    }
+    else if(@Model.IsPost)
+    {
+        @Model.ErrorMessage
+    }
+</body>
+</html>
